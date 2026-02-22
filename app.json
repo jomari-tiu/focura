@@ -1,30 +1,50 @@
 {
   "expo": {
-    "name": "focura",
+    "name": "Focura",
     "slug": "focura",
+    "scheme": "focura",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0F0B1E"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#0F0B1E"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.jomwicked.focura"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#7C3AED"
+        }
+      ],
+      "expo-asset",
+      "expo-font"
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "ffe8abe8-b01a-4fd9-a4be-5c2db0bce254"
+      }
     }
   }
 }

@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"/c/Users/jomti/OneDrive/Desktop/Workspace/Mobile Applications/focura\" status:*)",
+      "Bash(node --version:*)",
+      "Bash(npm --version:*)",
+      "Bash(npx:*)",
+      "WebFetch(domain:docs.expo.dev)",
+      "WebFetch(domain:www.nativewind.dev)",
+      "WebFetch(domain:github.com)",
+      "WebSearch",
+      "Bash(npm install:*)",
+      "Bash(python3:*)",
+      "Bash(eas build:*)",
+      "Bash(where java:*)",
+      "Bash(echo JAVA_HOME=$JAVA_HOME:*)",
+      "Bash(export:*)",
+      "Bash(export JAVA_HOME=\"C:/Program Files/Android/Android Studio/jbr\" && export PATH=\"/c/Program Files/Android/Android Studio/jbr/bin:$PATH\" && java -version 2>&1)",
+      "Bash(echo EXIT: $?:*)",
+      "Bash(cmd:*)"
+    ]
+  }
+}
