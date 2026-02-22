@@ -30,12 +30,13 @@ export default function HomeScreen() {
   const [showTaskForm, setShowTaskForm] = useState(false);
 
   const activeTask = tasks.find(
-    (t) => t.id === timer.activeTaskId && t.status === "active"
+    (t) => t.id === timer.activeTaskId && t.status === "active",
   );
   const activeTasks = tasks.filter((t) => t.status === "active");
 
   const isRunning = timer.status === "running";
-  const progress = timer.totalSeconds > 0 ? todaySessionCount / settings.dailyGoal : 0;
+  const progress =
+    timer.totalSeconds > 0 ? todaySessionCount / settings.dailyGoal : 0;
 
   return (
     <GradientBackground>
@@ -74,7 +75,11 @@ export default function HomeScreen() {
                   style={styles.addTaskBtn}
                   hitSlop={8}
                 >
-                  <Ionicons name="add" size={20} color={COLORS.brand.purpleLight} />
+                  <Ionicons
+                    name="add"
+                    size={20}
+                    color={COLORS.brand.purpleLight}
+                  />
                 </TouchableOpacity>
               )}
             </View>
@@ -86,7 +91,10 @@ export default function HomeScreen() {
                   <TouchableOpacity
                     key={task.id}
                     onPress={() =>
-                      dispatch({ type: ACTIONS.TIMER_SET_TASK, payload: task.id })
+                      dispatch({
+                        type: ACTIONS.TIMER_SET_TASK,
+                        payload: task.id,
+                      })
                     }
                     style={[
                       styles.taskChip,
@@ -96,7 +104,8 @@ export default function HomeScreen() {
                     <Text
                       style={[
                         styles.taskChipText,
-                        task.id === timer.activeTaskId && styles.taskChipTextActive,
+                        task.id === timer.activeTaskId &&
+                          styles.taskChipTextActive,
                       ]}
                       numberOfLines={1}
                     >
@@ -139,12 +148,18 @@ export default function HomeScreen() {
             <View style={styles.progressHeader}>
               <Text style={styles.progressLabel}>Daily Goal</Text>
               <Text style={styles.progressCount}>
-                <Text style={styles.progressHighlight}>{todaySessionCount}</Text>
+                <Text style={styles.progressHighlight}>
+                  {todaySessionCount}
+                </Text>
                 {" / "}
                 {settings.dailyGoal} sessions
               </Text>
             </View>
-            <ProgressBar progress={progress} height={8} style={styles.progressBar} />
+            <ProgressBar
+              progress={progress}
+              height={8}
+              style={styles.progressBar}
+            />
           </GlassCard>
         </ScrollView>
       </SafeAreaView>

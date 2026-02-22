@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext, useAppState } from "../context/AppContext";
 import { ACTIONS } from "../context/actions";
 import { useHaptics } from "./useHaptics";
 import { useNotifications } from "./useNotifications";
@@ -10,6 +10,7 @@ export function useTimer() {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const { triggerSuccess } = useHaptics();
   const { sendCompletionNotification } = useNotifications();
+  const { settings } = useAppState();
 
   // Tick every second when running
   useEffect(() => {
@@ -37,7 +38,7 @@ export function useTimer() {
     if (timer.status === "completed") {
       dispatch({ type: ACTIONS.TIMER_COMPLETE });
       triggerSuccess();
-      sendCompletionNotification();
+      if (settings.notificationsEnabled) sendCompletionNotification();
     }
   }, [timer.status, dispatch, triggerSuccess, sendCompletionNotification]);
 

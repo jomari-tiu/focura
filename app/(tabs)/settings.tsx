@@ -16,7 +16,11 @@ import { SessionSelector } from "../../src/components/timer/SessionSelector";
 import { useAppState, useAppDispatch } from "../../src/context/AppContext";
 import { ACTIONS } from "../../src/context/actions";
 import { COLORS } from "../../src/constants/colors";
-import { SPACING, BORDER_RADIUS, TAB_BAR_HEIGHT } from "../../src/constants/layout";
+import {
+  SPACING,
+  BORDER_RADIUS,
+  TAB_BAR_HEIGHT,
+} from "../../src/constants/layout";
 import { FONT_SIZES, FONT_WEIGHTS } from "../../src/constants/typography";
 
 interface SettingRowProps {
@@ -60,7 +64,7 @@ export default function SettingsScreen() {
           style: "destructive",
           onPress: () => dispatch({ type: ACTIONS.RESET_ALL_DATA }),
         },
-      ]
+      ],
     );
   };
 
@@ -83,15 +87,16 @@ export default function SettingsScreen() {
             { paddingBottom: TAB_BAR_HEIGHT + SPACING.lg },
           ]}
         >
-          {/* Header */}
           <View style={styles.header}>
             <Text style={styles.title}>Settings</Text>
           </View>
 
-          {/* Timer Settings */}
           <SectionHeader title="Timer" />
           <GlassCard style={styles.card}>
-            <SettingRow label="Session Length" subtitle="Duration of a focus session">
+            <SettingRow
+              label="Session Length"
+              subtitle="Duration of a focus session"
+            >
               <SessionSelector selected={settings.defaultSessionLength} />
             </SettingRow>
 
@@ -116,10 +121,12 @@ export default function SettingsScreen() {
             </SettingRow>
           </GlassCard>
 
-          {/* App Settings */}
           <SectionHeader title="App" />
           <GlassCard style={styles.card}>
-            <SettingRow label="Notifications" subtitle="Alert when session ends">
+            <SettingRow
+              label="Notifications"
+              subtitle="Alert when session ends"
+            >
               <Switch
                 value={settings.notificationsEnabled}
                 onValueChange={(v) => updateSetting("notificationsEnabled", v)}
@@ -156,7 +163,8 @@ export default function SettingsScreen() {
                     <Text
                       style={[
                         styles.themePillText,
-                        settings.themeMode === mode && styles.themePillTextActive,
+                        settings.themeMode === mode &&
+                          styles.themePillTextActive,
                       ]}
                     >
                       {mode.charAt(0).toUpperCase() + mode.slice(1)}
@@ -170,8 +178,16 @@ export default function SettingsScreen() {
           {/* Danger Zone */}
           <SectionHeader title="Data" />
           <GlassCard style={styles.card}>
-            <TouchableOpacity onPress={handleReset} style={styles.dangerRow} activeOpacity={0.7}>
-              <Ionicons name="trash-outline" size={20} color={COLORS.semantic.error} />
+            <TouchableOpacity
+              onPress={handleReset}
+              style={styles.dangerRow}
+              activeOpacity={0.7}
+            >
+              <Ionicons
+                name="trash-outline"
+                size={20}
+                color={COLORS.semantic.error}
+              />
               <View style={styles.dangerInfo}>
                 <Text style={styles.dangerLabel}>Reset All Data</Text>
                 <Text style={styles.dangerSubtitle}>

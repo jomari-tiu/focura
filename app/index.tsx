@@ -1,5 +1,4 @@
 import { Redirect } from "expo-router";
-import { useAppState } from "../src/context/AppContext";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
 import { COLORS } from "../src/constants/colors";
 import { useEffect, useState } from "react";
@@ -19,7 +18,6 @@ export default function IndexScreen() {
           setHasOnboarded(!!parsed.hasCompletedOnboarding);
         }
       } catch {
-        // ignore
       } finally {
         setReady(true);
       }

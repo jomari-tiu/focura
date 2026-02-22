@@ -25,18 +25,15 @@ export function useNotifications() {
 
   const sendCompletionNotification = useCallback(async () => {
     if (Platform.OS === "web") return;
-    try {
-      await Notifications.scheduleNotificationAsync({
-        content: {
-          title: "Focus session complete! 🎉",
-          body: "Great work! Take a short break before the next session.",
-          sound: true,
-        },
-        trigger: null, // Fire immediately
-      });
-    } catch (e) {
-      // Notifications may not be available in Expo Go
-    }
+
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Focus session complete! 🎉",
+        body: "Great work! Take a short break before the next session.",
+        sound: true,
+      },
+      trigger: null, // Fire immediately
+    });
   }, []);
 
   return { requestPermissions, sendCompletionNotification };

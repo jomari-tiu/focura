@@ -61,6 +61,7 @@ export default function OnboardingScreen() {
   const { requestPermissions } = useNotifications();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sessionLength, setSessionLength] = useState<25 | 50>(25);
+
   const translateX = useSharedValue(0);
 
   const goTo = (index: number) => {

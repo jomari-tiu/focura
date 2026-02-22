@@ -16,7 +16,6 @@ export function GradientBackground({ children }: GradientBackgroundProps) {
         end={{ x: 0, y: 1 }}
         style={StyleSheet.absoluteFill}
       />
-      {/* Glow blob */}
       <View style={styles.glow} pointerEvents="none" />
       {children}
     </View>
