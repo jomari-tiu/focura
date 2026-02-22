@@ -67,8 +67,8 @@ export default function OnboardingScreen() {
   const goTo = (index: number) => {
     setCurrentIndex(index);
     translateX.value = withSpring(-index * SCREEN_WIDTH, {
-      damping: 28,
-      stiffness: 220,
+      damping: 100,
+      stiffness: 500,
     });
   };
 
@@ -76,7 +76,6 @@ export default function OnboardingScreen() {
     if (currentIndex < SLIDE_COUNT - 1) {
       goTo(currentIndex + 1);
     } else {
-      // Final slide — request notifications and complete
       await requestPermissions();
       dispatch({ type: ACTIONS.ONBOARDING_COMPLETE });
       dispatch({ type: ACTIONS.TIMER_SET_DURATION, payload: sessionLength });

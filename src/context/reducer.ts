@@ -5,9 +5,91 @@ import { recalculateStreak, getTodaySessionCount } from "../utils/statsCalculato
 import { SESSION_25_SECONDS } from "../constants/timer";
 
 export const initialState: AppState = {
-  tasks: [],
-  sessions: [],
-  dailyStats: [],
+  tasks: [
+    {
+      id: "mock-task-1",
+      title: "Design new landing page",
+      estimatedSessions: 8,
+      completedSessions: 6,
+      status: "active",
+      order: 0,
+      createdAt: "2026-02-15T09:00:00.000Z",
+    },
+    {
+      id: "mock-task-2",
+      title: "Write quarterly report",
+      estimatedSessions: 6,
+      completedSessions: 6,
+      status: "completed",
+      order: 1,
+      createdAt: "2026-02-14T09:00:00.000Z",
+    },
+    {
+      id: "mock-task-3",
+      title: "Fix authentication bug",
+      estimatedSessions: 4,
+      completedSessions: 2,
+      status: "active",
+      order: 2,
+      createdAt: "2026-02-20T10:00:00.000Z",
+    },
+    {
+      id: "mock-task-4",
+      title: "Prepare team presentation",
+      estimatedSessions: 3,
+      completedSessions: 3,
+      status: "completed",
+      order: 3,
+      createdAt: "2026-02-12T09:00:00.000Z",
+    },
+    {
+      id: "mock-task-5",
+      title: "Review pull requests",
+      estimatedSessions: 2,
+      completedSessions: 1,
+      status: "active",
+      order: 4,
+      createdAt: "2026-02-22T08:00:00.000Z",
+    },
+  ],
+  sessions: [
+    // 2026-02-16 — 4 sessions
+    { id: "mock-s1",  taskId: "mock-task-1", type: "focus", durationMinutes: 25, completedAt: "2026-02-16T10:00:00.000Z", wasCompleted: true },
+    { id: "mock-s2",  taskId: "mock-task-1", type: "focus", durationMinutes: 25, completedAt: "2026-02-16T10:30:00.000Z", wasCompleted: true },
+    { id: "mock-s3",  taskId: "mock-task-2", type: "focus", durationMinutes: 25, completedAt: "2026-02-16T14:00:00.000Z", wasCompleted: true },
+    { id: "mock-s4",  taskId: "mock-task-2", type: "focus", durationMinutes: 25, completedAt: "2026-02-16T14:30:00.000Z", wasCompleted: true },
+    // 2026-02-17 — 3 sessions
+    { id: "mock-s5",  taskId: "mock-task-2", type: "focus", durationMinutes: 25, completedAt: "2026-02-17T09:00:00.000Z", wasCompleted: true },
+    { id: "mock-s6",  taskId: "mock-task-2", type: "focus", durationMinutes: 25, completedAt: "2026-02-17T09:30:00.000Z", wasCompleted: true },
+    { id: "mock-s7",  taskId: "mock-task-4", type: "focus", durationMinutes: 25, completedAt: "2026-02-17T14:00:00.000Z", wasCompleted: true },
+    // 2026-02-18 — 4 sessions
+    { id: "mock-s8",  taskId: "mock-task-1", type: "focus", durationMinutes: 25, completedAt: "2026-02-18T10:00:00.000Z", wasCompleted: true },
+    { id: "mock-s9",  taskId: "mock-task-1", type: "focus", durationMinutes: 25, completedAt: "2026-02-18T10:30:00.000Z", wasCompleted: true },
+    { id: "mock-s10", taskId: "mock-task-2", type: "focus", durationMinutes: 25, completedAt: "2026-02-18T15:00:00.000Z", wasCompleted: true },
+    { id: "mock-s11", taskId: "mock-task-2", type: "focus", durationMinutes: 25, completedAt: "2026-02-18T15:30:00.000Z", wasCompleted: true },
+    // 2026-02-19 — 2 sessions
+    { id: "mock-s12", taskId: "mock-task-4", type: "focus", durationMinutes: 25, completedAt: "2026-02-19T11:00:00.000Z", wasCompleted: true },
+    { id: "mock-s13", taskId: "mock-task-4", type: "focus", durationMinutes: 25, completedAt: "2026-02-19T11:30:00.000Z", wasCompleted: true },
+    // 2026-02-20 — 3 sessions
+    { id: "mock-s14", taskId: "mock-task-1", type: "focus", durationMinutes: 25, completedAt: "2026-02-20T09:00:00.000Z", wasCompleted: true },
+    { id: "mock-s15", taskId: "mock-task-1", type: "focus", durationMinutes: 25, completedAt: "2026-02-20T09:30:00.000Z", wasCompleted: true },
+    { id: "mock-s16", taskId: "mock-task-3", type: "focus", durationMinutes: 25, completedAt: "2026-02-20T14:00:00.000Z", wasCompleted: true },
+    // 2026-02-21 — 2 sessions
+    { id: "mock-s17", taskId: "mock-task-3", type: "focus", durationMinutes: 25, completedAt: "2026-02-21T10:00:00.000Z", wasCompleted: true },
+    { id: "mock-s18", taskId: null,           type: "focus", durationMinutes: 25, completedAt: "2026-02-21T15:00:00.000Z", wasCompleted: true },
+    // 2026-02-22 — 2 sessions (today)
+    { id: "mock-s19", taskId: null,           type: "focus", durationMinutes: 25, completedAt: "2026-02-22T09:00:00.000Z", wasCompleted: true },
+    { id: "mock-s20", taskId: "mock-task-5",  type: "focus", durationMinutes: 25, completedAt: "2026-02-22T10:00:00.000Z", wasCompleted: true },
+  ],
+  dailyStats: [
+    { date: "2026-02-16", sessionsCompleted: 4, focusMinutes: 100 },
+    { date: "2026-02-17", sessionsCompleted: 3, focusMinutes: 75  },
+    { date: "2026-02-18", sessionsCompleted: 4, focusMinutes: 100 },
+    { date: "2026-02-19", sessionsCompleted: 2, focusMinutes: 50  },
+    { date: "2026-02-20", sessionsCompleted: 3, focusMinutes: 75  },
+    { date: "2026-02-21", sessionsCompleted: 2, focusMinutes: 50  },
+    { date: "2026-02-22", sessionsCompleted: 2, focusMinutes: 50  },
+  ],
   settings: {
     defaultSessionLength: 25,
     dailyGoal: 8,
@@ -15,9 +97,9 @@ export const initialState: AppState = {
     notificationsEnabled: true,
   },
   streak: {
-    currentStreak: 0,
-    longestStreak: 0,
-    lastActiveDate: null,
+    currentStreak: 7,
+    longestStreak: 7,
+    lastActiveDate: "2026-02-22",
   },
   timer: {
     status: "idle",
@@ -26,8 +108,8 @@ export const initialState: AppState = {
     activeTaskId: null,
     currentSessionType: "focus",
   },
-  hasCompletedOnboarding: false,
-  todaySessionCount: 0,
+  hasCompletedOnboarding: true,
+  todaySessionCount: 2,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -2,11 +2,11 @@ import React, { useEffect, useCallback } from "react";
 import {
   View,
   StyleSheet,
-  TouchableOpacity,
   Modal,
   Pressable,
   KeyboardAvoidingView,
   Platform,
+  Text,
 } from "react-native";
 import Animated, {
   useSharedValue,
@@ -37,18 +37,18 @@ export function BottomSheet({
   const opacity = useSharedValue(0);
 
   const open = useCallback(() => {
-    opacity.value = withTiming(1, { duration: 200 });
+    opacity.value = withTiming(1, { duration: 100 });
     translateY.value = withSpring(0, {
-      damping: 25,
-      stiffness: 300,
+      damping: 80,
+      stiffness: 400,
     });
   }, [opacity, translateY]);
 
   const close = useCallback(() => {
-    opacity.value = withTiming(0, { duration: 200 });
+    opacity.value = withTiming(0, { duration: 100 });
     translateY.value = withSpring(snapHeight, {
-      damping: 25,
-      stiffness: 300,
+      damping: 80,
+      stiffness: 400,
     });
   }, [opacity, translateY, snapHeight]);
 
@@ -70,7 +70,7 @@ export function BottomSheet({
       if (e.translationY > snapHeight * 0.4) {
         runOnJS(onClose)();
       } else {
-        translateY.value = withSpring(0, { damping: 25, stiffness: 300 });
+        translateY.value = withSpring(0, { damping: 50, stiffness: 500 });
       }
     });
 
@@ -85,7 +85,12 @@ export function BottomSheet({
   if (!visible) return null;
 
   return (
-    <Modal transparent visible={visible} onRequestClose={onClose} animationType="none">
+    <Modal
+      transparent
+      visible={visible}
+      onRequestClose={onClose}
+      animationType="none"
+    >
       <KeyboardAvoidingView
         style={styles.flex}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -103,8 +108,9 @@ export function BottomSheet({
 
         <View style={styles.container}>
           <GestureDetector gesture={panGesture}>
-            <Animated.View style={[styles.sheet, { height: snapHeight }, sheetStyle]}>
-              {/* Handle */}
+            <Animated.View
+              style={[styles.sheet, { height: snapHeight }, sheetStyle]}
+            >
               <View style={styles.handleContainer}>
                 <View style={styles.handle} />
               </View>

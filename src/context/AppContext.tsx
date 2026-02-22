@@ -34,14 +34,26 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const persistTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isHydrated = useRef(false);
 
-  // Load state from AsyncStorage on mount
   useEffect(() => {
     async function hydrate() {
       try {
         const raw = await AsyncStorage.getItem(STORAGE_KEYS.APP_STATE);
         if (raw) {
           const parsed = JSON.parse(raw) as Partial<AppState>;
-          dispatch({ type: ACTIONS.HYDRATE, payload: parsed });
+          // If storage has no tasks, seed with mock initial data
+          const payload = parsed.tasks?.length
+            ? parsed
+            : {
+                ...initialState,
+                ...parsed,
+                tasks: initialState.tasks,
+                sessions: initialState.sessions,
+                dailyStats: initialState.dailyStats,
+                streak: initialState.streak,
+                hasCompletedOnboarding: initialState.hasCompletedOnboarding,
+                todaySessionCount: initialState.todaySessionCount,
+              };
+          dispatch({ type: ACTIONS.HYDRATE, payload });
         }
       } catch (e) {
         console.warn("[Focura] Failed to hydrate state:", e);
